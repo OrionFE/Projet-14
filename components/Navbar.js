@@ -1,9 +1,9 @@
-"use client";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+"use client"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 const Navbar = () => {
-  const currentRoute = usePathname();
+  const currentRoute = usePathname()
 
   return (
     <nav>
@@ -32,7 +32,7 @@ const Navbar = () => {
         </li>
       </ul>
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

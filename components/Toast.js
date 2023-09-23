@@ -1,9 +1,9 @@
-import React from "react";
+import React from "react"
 
 const Toast = ({ setToastIsOn }) => {
   return (
     <div className="bg-slate-700/70 w-full h-full absolute top-0">
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bottom-24 right-5 bg-green-200 drop-shadow font-semibold text-center flex flex-col justify-around items-center rounded w-62 h-32 ">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bottom-24 right-5 bg-green-100 drop-shadow font-semibold text-center flex flex-col justify-around items-center rounded w-64 h-32 ">
         <svg
           className="fill-green-600 w-12 h-12"
           xmlns="http://www.w3.org/2000/svg"
@@ -14,7 +14,7 @@ const Toast = ({ setToastIsOn }) => {
         <p>Employee created</p>
         <svg
           onClick={() => {
-            setToastIsOn(false);
+            setToastIsOn(false)
           }}
           className="cursor-pointer w-8 h-8 absolute top-2 right-2"
           xmlns="http://www.w3.org/2000/svg"
@@ -25,7 +25,7 @@ const Toast = ({ setToastIsOn }) => {
         </svg>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Toast;
+export default Toast

@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 const Input = ({ label, id, children }) => {
   return (
@@ -8,7 +8,7 @@ const Input = ({ label, id, children }) => {
       </label>
       {children}
     </div>
-  );
-};
+  )
+}
 
-export default Input;
+export default Input

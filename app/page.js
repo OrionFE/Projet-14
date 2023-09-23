@@ -1,7 +1,8 @@
-"use client";
-import Input from "@/components/Input";
-import Toast from "@/components/Toast";
-import { useState } from "react";
+"use client"
+
+import Input from "@/components/Input"
+import Toast from "@/components/Toast"
+import { useEffect, useState } from "react"
 
 export default function Home() {
   const arrayState = [
@@ -55,14 +56,14 @@ export default function Home() {
     "West Virginia",
     "Wisconsin",
     "Wyoming",
-  ];
+  ]
   const arrayDep = [
     "Sales",
     "Marketing",
     "Engineering",
     "Human Resources",
     "Legal",
-  ];
+  ]
 
   // Return all state option
   const optionlistState = arrayState.map((state, index) => {
@@ -70,8 +71,8 @@ export default function Home() {
       <option key={index} value={state}>
         {state}
       </option>
-    );
-  });
+    )
+  })
 
   // Return all departement option
   const optionlistDep = arrayDep.map((dep, index) => {
@@ -79,8 +80,8 @@ export default function Home() {
       <option key={index} value={dep}>
         {dep}
       </option>
-    );
-  });
+    )
+  })
 
   const submit = () => {
     const data = {
@@ -93,47 +94,49 @@ export default function Home() {
       state,
       zipcode,
       departement,
-    };
+    }
 
-    // Put all the employee info in local storage
+    if (typeof window !== "undefined") {
+      // Put all the employee info in local storage
 
-    const getEmployees =
-      JSON.parse(window.localStorage.getItem("employee")) || [];
+      const getEmployees =
+        JSON.parse(window.localStorage.getItem("employee")) || []
 
-    getEmployees.push(data);
+      getEmployees.push(data)
 
-    window.localStorage.setItem("employee", JSON.stringify(getEmployees));
-    setToastIsOn(true);
-    setFirstName("");
-    setLastName("");
-    setDateBirth("");
-    setDateStart("");
-    setStreet("");
-    setCity("");
-    setState("");
-    setZipcode("");
-    setDepartement("");
-  };
+      window.localStorage.setItem("employee", JSON.stringify(getEmployees))
+    }
+    setToastIsOn(true)
+    setFirstName("")
+    setLastName("")
+    setDateBirth("")
+    setDateStart("")
+    setStreet("")
+    setCity("")
+    setState("")
+    setZipcode("")
+    setDepartement("")
+  }
 
-  const [toastIsOn, setToastIsOn] = useState(false);
+  const [toastIsOn, setToastIsOn] = useState(false)
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [dateBirth, setDateBirth] = useState("");
-  const [dateStart, setDateStart] = useState("");
-  const [street, setStreet] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("Alabama");
-  const [zipcode, setZipcode] = useState("");
-  const [departement, setDepartement] = useState("Legal");
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
+  const [dateBirth, setDateBirth] = useState("")
+  const [dateStart, setDateStart] = useState("")
+  const [street, setStreet] = useState("")
+  const [city, setCity] = useState("")
+  const [state, setState] = useState("Alabama")
+  const [zipcode, setZipcode] = useState("")
+  const [departement, setDepartement] = useState("Legal")
 
   return (
     <>
       <form
         className="max-w-xl mx-auto my-5 flex flex-col"
         onSubmit={(event) => {
-          event.preventDefault();
-          submit();
+          event.preventDefault()
+          submit()
         }}
       >
         <Input label="First Name" id="firstName">
@@ -145,7 +148,7 @@ export default function Home() {
             placeholder="John"
             required
             onChange={(event) => {
-              setFirstName(event.target.value);
+              setFirstName(event.target.value)
             }}
           />
         </Input>
@@ -158,7 +161,7 @@ export default function Home() {
             placeholder="Doe"
             required
             onChange={(event) => {
-              setLastName(event.target.value);
+              setLastName(event.target.value)
             }}
           />
         </Input>
@@ -170,7 +173,7 @@ export default function Home() {
             value={dateBirth}
             required
             onChange={(event) => {
-              setDateBirth(event.target.value);
+              setDateBirth(event.target.value)
             }}
           />
         </Input>
@@ -182,7 +185,7 @@ export default function Home() {
             value={dateStart}
             required
             onChange={(event) => {
-              setDateStart(event.target.value);
+              setDateStart(event.target.value)
             }}
           />
         </Input>
@@ -197,7 +200,7 @@ export default function Home() {
               placeholder="5 rue openclassroom"
               required
               onChange={(event) => {
-                setStreet(event.target.value);
+                setStreet(event.target.value)
               }}
             />
           </Input>
@@ -210,7 +213,7 @@ export default function Home() {
               placeholder="New York"
               required
               onChange={(event) => {
-                setCity(event.target.value);
+                setCity(event.target.value)
               }}
             />
           </Input>
@@ -220,7 +223,7 @@ export default function Home() {
               id="state"
               value={state}
               onChange={(event) => {
-                setState(event.target.value);
+                setState(event.target.value)
               }}
             >
               {optionlistState}
@@ -234,7 +237,7 @@ export default function Home() {
               value={zipcode}
               required
               onChange={(event) => {
-                setZipcode(event.target.value);
+                setZipcode(event.target.value)
               }}
             />
           </Input>
@@ -246,7 +249,7 @@ export default function Home() {
             id="departement"
             value={departement}
             onChange={(event) => {
-              setDepartement(event.target.value);
+              setDepartement(event.target.value)
             }}
           >
             {optionlistDep}
@@ -262,5 +265,5 @@ export default function Home() {
       </form>
       {toastIsOn && <Toast setToastIsOn={setToastIsOn} />}
     </>
-  );
+  )
 }

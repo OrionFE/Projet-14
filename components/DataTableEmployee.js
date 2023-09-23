@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
-import DataTable from "react-data-table-component";
+"use client"
 
-const DataTableEmployee = ({ employees }) => {
+import React, { useEffect, useState } from "react"
+import DataTable from "react-data-table-component"
+
+const DataTableEmployee = () => {
   const colums = [
     {
       name: "First name",
@@ -48,10 +50,17 @@ const DataTableEmployee = ({ employees }) => {
       selector: (row) => row.zipcode,
       sortable: true,
     },
-  ];
+  ]
 
-  const [search, setSearch] = useState("");
-  const [filterResult, setFilterResult] = useState(employees);
+  useEffect(() => {
+    const employees = JSON.parse(window.localStorage.getItem("employee"))
+    setDataIsLoaded(true)
+    setFilterResult(employees)
+  }, [])
+
+  const [dataIsLoaded, setDataIsLoaded] = useState(false)
+  const [search, setSearch] = useState("")
+  const [filterResult, setFilterResult] = useState([])
 
   useEffect(() => {
     // Return an array of employee which include the search word
@@ -67,32 +76,38 @@ const DataTableEmployee = ({ employees }) => {
         item.dateStart.toLowerCase().includes(search.toLowerCase()) ||
         item.dateBirth.toLowerCase().includes(search.toLowerCase())
       ) {
-        return item;
+        return item
       }
-    });
-    setFilterResult(filteredData);
-  }, [search, employees]);
+    })
+    setFilterResult(filteredData)
+  }, [search])
 
   return (
-    <DataTable
-      columns={colums}
-      data={filterResult}
-      pagination
-      fixedHeader
-      subHeader
-      subHeaderComponent={
-        <input
-          className="border-2 rounded"
-          type="text"
-          placeholder="Search ..."
-          value={search}
-          onChange={(event) => {
-            setSearch(event.target.value);
-          }}
+    <>
+      {dataIsLoaded ? (
+        <p>Loading</p>
+      ) : (
+        <DataTable
+          columns={colums}
+          data={filterResult}
+          pagination
+          fixedHeader
+          subHeader
+          subHeaderComponent={
+            <input
+              className="border-2 rounded"
+              type="text"
+              placeholder="Search ..."
+              value={search}
+              onChange={(event) => {
+                setSearch(event.target.value)
+              }}
+            />
+          }
         />
-      }
-    />
-  );
-};
+      )}
+    </>
+  )
+}
 
-export default DataTableEmployee;
+export default DataTableEmployee
