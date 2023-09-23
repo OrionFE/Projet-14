@@ -66,7 +66,7 @@ const DataTableEmployee = () => {
 
   useEffect(() => {
     // Return an array of employee which include the search word
-    if (employee.length !== 0) {
+    if (employee !== null) {
       const filteredData = [...employee].filter((item) => {
         if (
           item.firstName.toLowerCase().includes(search.toLowerCase()) ||
