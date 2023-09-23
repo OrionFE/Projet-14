@@ -54,17 +54,19 @@ const DataTableEmployee = () => {
 
   useEffect(() => {
     const employees = JSON.parse(window.localStorage.getItem("employee"))
-    setDataIsLoaded(true)
     setFilterResult(employees)
+    setEmployee(employees)
+    setDataIsLoaded(true)
   }, [])
 
   const [dataIsLoaded, setDataIsLoaded] = useState(false)
   const [search, setSearch] = useState("")
   const [filterResult, setFilterResult] = useState([])
+  const [employee, setEmployee] = useState([])
 
   useEffect(() => {
     // Return an array of employee which include the search word
-    const filteredData = [...employees].filter((item) => {
+    const filteredData = [...employee].filter((item) => {
       if (
         item.firstName.toLowerCase().includes(search.toLowerCase()) ||
         item.lastName.toLowerCase().includes(search.toLowerCase()) ||
@@ -80,11 +82,11 @@ const DataTableEmployee = () => {
       }
     })
     setFilterResult(filteredData)
-  }, [search])
+  }, [search, employee])
 
   return (
     <>
-      {dataIsLoaded ? (
+      {!dataIsLoaded ? (
         <p>Loading</p>
       ) : (
         <DataTable
