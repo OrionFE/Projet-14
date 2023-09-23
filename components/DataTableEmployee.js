@@ -66,22 +66,24 @@ const DataTableEmployee = () => {
 
   useEffect(() => {
     // Return an array of employee which include the search word
-    const filteredData = [...employee].filter((item) => {
-      if (
-        item.firstName.toLowerCase().includes(search.toLowerCase()) ||
-        item.lastName.toLowerCase().includes(search.toLowerCase()) ||
-        item.departement.toLowerCase().includes(search.toLowerCase()) ||
-        item.street.toLowerCase().includes(search.toLowerCase()) ||
-        item.city.toLowerCase().includes(search.toLowerCase()) ||
-        item.state.toLowerCase().includes(search.toLowerCase()) ||
-        item.zipcode.toLowerCase().includes(search.toLowerCase()) ||
-        item.dateStart.toLowerCase().includes(search.toLowerCase()) ||
-        item.dateBirth.toLowerCase().includes(search.toLowerCase())
-      ) {
-        return item
-      }
-    })
-    setFilterResult(filteredData)
+    if (employee.length !== 0) {
+      const filteredData = [...employee].filter((item) => {
+        if (
+          item.firstName.toLowerCase().includes(search.toLowerCase()) ||
+          item.lastName.toLowerCase().includes(search.toLowerCase()) ||
+          item.departement.toLowerCase().includes(search.toLowerCase()) ||
+          item.street.toLowerCase().includes(search.toLowerCase()) ||
+          item.city.toLowerCase().includes(search.toLowerCase()) ||
+          item.state.toLowerCase().includes(search.toLowerCase()) ||
+          item.zipcode.toLowerCase().includes(search.toLowerCase()) ||
+          item.dateStart.toLowerCase().includes(search.toLowerCase()) ||
+          item.dateBirth.toLowerCase().includes(search.toLowerCase())
+        ) {
+          return item
+        }
+      })
+      setFilterResult(filteredData)
+    }
   }, [search, employee])
 
   return (
